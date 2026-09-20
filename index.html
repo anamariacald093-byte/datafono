@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CajaMóvil Pyme S.A.S. | Datáfono Inteligente Offline-Sync</title>
+    <style>
+        /* ==========================================
+           1. RESET Y PALETA DE COLORES VIBRANTES
+           ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-blue: #0A2540;     /* Azul Oscuro Tecnológico */
+            --electric-blue: #0066FF;    /* Azul Eléctrico para destaques */
+            --accent-orange: #FF5A1F;    /* Naranja Vibrante para Botones y CTA */
+            --success-green: #00D4B1;    /* Verde Transaccional */
+            --light-bg: #F8FAFC;         /* Gris Claro de Fondo */
+            --white: #FFFFFF;
+            --dark-text: #1E293B;
+            --gray-text: #64748B;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           2. ENCABEZADO Y NAVEGACIÓN
+           ========================================== */
+        header {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 1.2rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-orange);
+        }
+
+        /* ==========================================
+           3. SECCIÓN HERO (PORTADA PRINCIPAL)
+           ========================================== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--electric-blue) 100%);
+            color: var(--white);
+            padding: 5rem 6%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2.5rem;
+        }
+
+        .hero-text {
+            flex: 1 1 500px;
+        }
+
+        .tag-badge {
+            background: rgba(255, 90, 31, 0.2);
+            color: var(--accent-orange);
+            border: 1px solid var(--accent-orange);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-text h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #E2E8F0;
+        }
+
+        .price-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--success-green);
+        }
+
+        .btn-cta {
+            background-color: var(--accent-orange);
+            color: var(--white);
+            padding: 1.1rem 2.2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 90, 31, 0.4);
+        }
+
+        .btn-cta:hover {
+            background-color: #E04810;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1 1 380px;
+            max-width: 480px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            object-fit: cover;
+        }
+
+        /* ==========================================
+           4. SECCIONES GENERALES Y TÍTULOS
+           ========================================== */
+        section {
+            padding: 5rem 6%;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 800;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--electric-blue), var(--accent-orange));
+            margin: 0.8rem auto 0;
+            border-radius: 3px;
+        }
+
+        /* ==========================================
+           5. SECCIÓN PRODUCTO Y ESPECIFICACIONES TÉCNICAS
+           ========================================== */
+        .product-details {
+            background-color: var(--white);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .tech-box {
+            background: linear-gradient(145deg, #0A2540 0%, #1E3A8A 100%);
+            color: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(10, 37, 64, 0.15);
+        }
+
+        .tech-box h3 {
+            color: var(--success-green);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+        }
+
+        .tech-box ul {
+            list-style: none;
+        }
+
+        .tech-box li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+        }
+
+        .tech-box li strong {
+            color: var(--accent-orange);
+        }
+
+        /* ==========================================
+           6. SECCIÓN BENEFICIOS CLAVE
+           ========================================== */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            background-color: var(--white);
+            padding: 2.2rem;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+        }
+
+        .card-blue::before { background: var(--electric-blue); }
+        .card-green::before { background: var(--success-green); }
+        .card-orange::before { background: var(--accent-orange); }
+
+        .benefit-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .benefit-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* ==========================================
+           7. SECCIÓN PRECIOS Y PLANES
+           ========================================== */
+        .financials {
+            background-color: #EFF6FF;
+        }
+
+        .pricing-box {
+            max-width: 550px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 102, 255, 0.12);
+            border: 2px solid var(--electric-blue);
+            position: relative;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-orange);
+            color: var(--white);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin: 1rem 0;
+        }
+
+        .features-list {
+            list-style: none;
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--light-bg);
+        }
+
+        /* ==========================================
+           8. EMPRESA Y AMBIENTAL
+           ========================================== */
+        .org-env {
+            background-color: var(--white);
+        }
+
+        .about-image {
+            flex: 1 1 380px;
+            max-width: 480px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .env-card {
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+            border-left: 6px solid var(--success-green);
+            padding: 1.8rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .env-card h3 {
+            color: #166534;
+            margin-bottom: 0.8rem;
+        }
+
+        /* ==========================================
+           9. FORMULARIO DE CONTACTO
+           ========================================== */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0F172A 100%);
+            color: var(--white);
+        }
+
+        .contact-section .section-title {
+            color: var(--white);
+        }
+
+        .contact-form {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 3rem;
+            border-radius: 16px;
+            color: var(--dark-text);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--accent-orange);
+            color: var(--white);
+            padding: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #E04810;
+        }
+
+        /* ==========================================
+           10. FOOTER
+           ========================================== */
+        footer {
+            background-color: #030712;
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 6%;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+            margin-bottom: 0.6rem;
+        }
+
+        /* RESPONSIVIDAD */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav a {
+                margin: 0 0.8rem;
+            }
+            .hero-text h1 {
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENCABEZADO -->
+    <header>
+        <a href="#" class="logo">CajaMóvil <span>Pyme</span> S.A.S.</a>
+        <nav>
+            <a href="#producto">Producto</a>
+            <a href="#beneficios">Beneficios</a>
+            <a href="#precios">Precios</a>
+            <a href="#nosotros">Empresa</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN HERO PRINCIPAL -->
+    <section class="hero">
+        <div class="hero-text">
+            <span class="tag-badge">🚀 Innovación Transaccional Pyme</span>
+            <h1>¡Nunca más pierdas una venta por fallas de internet!</h1>
+            <p>El datáfono inteligente portátil para la microempresa colombiana equipado con tecnología <strong>Offline-Sync</strong>. Procesa pagos con tarjeta de forma continua y segura, incluso sin conexión celular ni Wi-Fi.</p>
+            <div class="price-tag">
+                💰 Equipo propio: $250.000 COP (Sin arriendos mensuales)
+            </div>
+            <br>
+            <a href="#contacto" class="btn-cta">¡Pide tu Datáfono Hoy Mismo!</a>
+        </div>
+
+        <div class="hero-image">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Credit_card_terminal_in_Laos.jpg" alt="Datáfono Inteligente CajaMóvil Pyme procesando pago">
+        </div>
+    </section>
+
+    <!-- SECCIÓN PRODUCTO Y ESPECIFICACIONES TÉCNICAS -->
+    <section id="producto" class="product-details">
+        <h2 class="section-title">Funcionamiento Técnico y Resiliencia</h2>
+        <div class="grid-2">
+            <div>
+                <h3 style="color: var(--primary-blue); font-size: 1.6rem; margin-bottom: 1rem;">Solución a las caídas recurrentes de red</h3>
+                <p>Las fallas en la red móvil hacen que pequeños comerciantes pierdan hasta un 25% de sus ingresos diarios. CajaMóvil Pyme elimina esta vulnerabilidad gracias a su protocolo de sincronización diferida.</p>
+                <br>
+                <p>Cuando la conexión falla, la transacción se procesa y almacena localmente dentro de un bloque criptográfico seguro (AES-256). Al restablecerse la red, los datos se sincronizan automáticamente con los servidores centrales.</p>
+            </div>
+            <div class="tech-box">
+                <h3>🛠️ Especificaciones Técnicas del Hardware</h3>
+                <ul>
+                    <li><strong>Tecnología:</strong> Algoritmo propietario <em>Offline-Sync</em>.</li>
+                    <li><strong>Batería:</strong> Litio recargable de 5200 mAh (24+ horas continuas).</li>
+                    <li><strong>Seguridad:</strong> Cifrado de doble llave local AES-256.</li>
+                    <li><strong>Periféricos:</strong> Impresora térmica integrada y pantalla táctil.</li>
+                    <li><strong>Costo de Componentes:</strong> $150.000 COP costo directo de ensamble.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN BENEFICIOS CLAVE -->
+    <section id="beneficios">
+        <h2 class="section-title">¿Por qué elegir CajaMóvil Pyme?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card card-blue">
+                <h3>⚡ Cobra Sin Conexión</h3>
+                <p>Sigue aceptando tarjetas de débito y crédito sin importar las caídas de señal. La transacción se valida de forma local e ininterrumpida.</p>
+            </div>
+            <div class="benefit-card card-green">
+                <h3>🔋 Batería de Alta Autonomía</h3>
+                <p>Equipado con una batería de 5200 mAh para soportar jornadas completas de venta en tiendas, ferias o plazas de mercado.</p>
+            </div>
+            <div class="benefit-card card-orange">
+                <h3>🚫 Sin Cobros Ocultos</h3>
+                <p>Olvídate del pago de alquileres mensuales o cuotas fijas por inactividad. El equipo es 100% de tu propiedad.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN PRECIOS Y PLANES -->
+    <section id="precios" class="financials">
+        <h2 class="section-title">Inversión y Modelo de Negocio</h2>
+        <div class="pricing-box">
+            <span class="popular-badge">MÁS POPULAR</span>
+            <h3 style="color: var(--primary-blue); font-size: 1.5rem;">Datáfono Inteligente CajaMóvil</h3>
+            <div class="price-amount">$250.000 <span style="font-size: 1.2rem; color: var(--gray-text);">COP</span></div>
+            <p><strong>Pago Único - Adquisición Directa del Dispositivo</strong></p>
+            <ul class="features-list">
+                <li>✅ Datáfono físico con impresora térmica integrada</li>
+                <li>✅ Licencia de software transaccional <em>Offline-Sync</em></li>
+                <li>✅ Garantía de fábrica por 12 meses</li>
+                <li>✅ Punto de equilibrio operativo alcanzado al Mes 14</li>
+                <li>✅ Sin contratos de permanencia ni cobros de arriendo</li>
+            </ul>
+            <a href="#contacto" class="btn-cta">Solicitar Dispositivo</a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN EMPRESA Y COMPROMISO AMBIENTAL -->
+    <section id="nosotros" class="org-env">
+        <h2 class="section-title">Estructura y Compromiso Ambiental</h2>
+        <div class="grid-2">
+            <div>
+                <h3 style="color: var(--primary-blue); font-size: 1.5rem; margin-bottom: 1rem;">Organización Operativa</h3>
+                <p><strong>CajaMóvil Pyme S.A.S.</strong> opera desde una sede de 120 m² en Bogotá D.C., acondicionada con laboratorio de desarrollo, taller de ensamble antiestático y centro de soporte técnico.</p>
+                <br>
+                <p>Nuestro equipo está liderado por la Gerencia General (Ana María Calderón), la Coordinación Técnica, el Área Comercial y el Técnico de Ensamble.</p>
+            </div>
+
+            <div class="about-image">
+                <img src="https://www.poszeo.com/wp-content/uploads/2026/03/Small-Business-Credit-Card-Reader-2026-Guide-to-Costs-Features-and-Best-Options-2-1300x743.webp" alt="Comerciante usando datáfono CajaMóvil Pyme en establecimiento">
+            </div>
+        </div>
+
+        <div class="env-card">
+            <h3>🌱 Gestión Ambiental y Compromiso RAEE (Ley 1672)</h3>
+            <p>Cumplimos estrictamente con la normativa colombiana de Gestión Integral de Residuos de Aparatos Eléctricos y Electrónicos. Ofrecemos un programa de logística inversa para el reciclaje seguro de baterías de litio y empaquetamos nuestros equipos en cajas de cartón kraft biodegradables.</p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN FORMULARIO DE CONTACTO / SOLICITUDES -->
+    <section id="contacto" class="contact-section">
+        <h2 class="section-title">Adquiere tu Datáfono CajaMóvil Pyme</h2>
+        <div class="contact-form">
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('¡Solicitud enviada con éxito! Un asesor comercial de CajaMóvil Pyme S.A.S. se comunicará contigo.');">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo o Razón Social:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej: Ana María Calderón / Tienda La Esperanza" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo_negocio">Tipo de Comercio:</label>
+                    <select id="tipo_negocio" name="tipo_negocio" required>
+                        <option value="">Selecciona tu tipo de negocio...</option>
+                        <option value="tienda">Tienda de Barrio / Minimarket</option>
+                        <option value="plaza">Comerciante de Plaza de Mercado</option>
+                        <option value="independiente">Prestador de Servicios Independiente</option>
+                        <option value="otro">Otro tipo de Pyme</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Número de Celular / WhatsApp:</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 300 123 4567" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ciudad">Ciudad / Municipio:</label>
+                    <input type="text" id="ciudad" name="ciudad" placeholder="Ej: Bogotá D.C." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">Comentarios o Número de Unidades:</label>
+                    <textarea id="mensaje" name="mensaje" rows="3" placeholder="Indícanos cuántos datáfonos necesitas o tus inquietudes principales..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Enviar Solicitud de Compra ($250.000 COP)</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer>
+        <p><strong>CajaMóvil Pyme S.A.S.</strong> | NIT: 901.348.937-1</p>
+        <p>Sede Principal: Calle 26 # 68-20, Bogotá D.C., Colombia</p>
+        <p>Inversión Inicial: $40.000.000 COP | Aporte Propio: $25.000.000 COP (62.5%)</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; color: #9CA3AF;">&copy; 2026 Todos los derechos reservados. Proyecto Productivo SENA - Ficha 3489371.</p>
+    </footer>
+
+</body>
+</html>
